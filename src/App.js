@@ -1,6 +1,6 @@
 import './App.css';
 import './select-search.css';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import SelectSearch, { fuzzySearch } from 'react-select-search';
 import data from './memegen-info.json';
 
