@@ -5,8 +5,8 @@ import SelectSearch, { fuzzySearch } from 'react-select-search';
 import data from './memegen-info.json';
 
 function App() {
-  const [topText, setTopText] = useState(' ');
-  const [bottomText, setBottomText] = useState(' ');
+  const [topText, setTopText] = useState('');
+  const [bottomText, setBottomText] = useState('');
   const [memeType, setMemeType] = useState('regret');
   const [image, setImage] = useState(
     ' https://api.memegen.link/images/regret/_/i_immediately_regret_this_decision.png?width=300&frames=10 ',
