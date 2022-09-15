@@ -58,6 +58,14 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+  /*  const glorp = 'glorp?-------plop';
+  function cleanInput(input) {
+    let cleanString = input.replace(/?/g, '~q');
+
+    return cleanString;
+  }
+  console.log(cleanInput(glorp)); */
+
   return (
     <div>
       <div>
@@ -100,6 +108,7 @@ function App() {
             search
             filterOptions={fuzzySearch}
           />
+          <input style={{ display: 'none' }} />
         </label>
 
         <button onClick={handleGenerate} data-test-id="generate-meme">
