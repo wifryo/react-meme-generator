@@ -11,12 +11,21 @@ function App() {
   const [image, setImage] = useState(
     ' https://api.memegen.link/images/regret/_/i_immediately_regret_this_decision.png?width=300&frames=10 ',
   );
+  function cleanInput(input) {
+    const cleanString = input.replaceAll('?', '~q');
+    cleanString.replaceAll('&', '~a');
+    cleanString.replaceAll('%', '~p');
+    cleanString.replaceAll('%', '~p');
+    cleanString.replaceAll(' ', '_');
+    cleanString.replaceAll('#', '~h');
+    cleanString.replaceAll('/', '~s');
+    return cleanString;
+  }
   const args = [];
-  args[0] = memeType;
-  args[1] = topText;
-  args[2] = bottomText;
+  args[0] = cleanInput(memeType);
+  args[1] = cleanInput(topText);
+  args[2] = cleanInput(bottomText);
   const url = `https://api.memegen.link/images/${args[0]}/${args[1]}/${args[2]}.jpg`;
-  console.log(url);
   const memegenData = data;
   const arr = [];
   const fileName = `/${args[0]}_${args[1]}_${args[2]}.jpeg`;
@@ -58,13 +67,10 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
-  /*  const glorp = 'glorp?-------plop';
-  function cleanInput(input) {
-    let cleanString = input.replace(/?/g, '~q');
 
-    return cleanString;
-  }
-  console.log(cleanInput(glorp)); */
+  /*  const cleanInput = (input) => {
+    let cleanString = input.replace(/'?'/g, '~q');
+  }; */
 
   return (
     <div>
@@ -108,7 +114,6 @@ function App() {
             search
             filterOptions={fuzzySearch}
           />
-          <input style={{ display: 'none' }} />
         </label>
 
         <button onClick={handleGenerate} data-test-id="generate-meme">
