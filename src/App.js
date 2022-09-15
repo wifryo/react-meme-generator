@@ -114,6 +114,7 @@ function App() {
             search
             filterOptions={fuzzySearch}
           />
+          <input style={{ display: 'none' }} />
         </label>
 
         <button onClick={handleGenerate} data-test-id="generate-meme">
