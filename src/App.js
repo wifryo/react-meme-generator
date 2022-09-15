@@ -22,7 +22,7 @@ function App() {
     return cleanString;
   }
   const args = [];
-  args[0] = cleanInput(memeType);
+  args[0] = memeType;
   args[1] = cleanInput(topText);
   args[2] = cleanInput(bottomText);
   const url = `https://api.memegen.link/images/${args[0]}/${args[1]}/${args[2]}.jpg`;
