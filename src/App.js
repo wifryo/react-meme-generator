@@ -12,13 +12,13 @@ function App() {
     ' https://api.memegen.link/images/regret/_/i_immediately_regret_this_decision.png?width=300&frames=10 ',
   );
   function cleanInput(input) {
-    const cleanString = input.replaceAll('?', '~q');
-    cleanString.replaceAll('&', '~a');
-    cleanString.replaceAll('%', '~p');
-    cleanString.replaceAll('%', '~p');
-    cleanString.replaceAll(' ', '_');
-    cleanString.replaceAll('#', '~h');
-    cleanString.replaceAll('/', '~s');
+    let cleanString = input.replaceAll('?', '~q');
+    cleanString = cleanString.replaceAll('&', '~a');
+    cleanString = cleanString.replaceAll('%', '~p');
+    cleanString = cleanString.replaceAll('%', '~p');
+    cleanString = cleanString.replaceAll(' ', '_');
+    cleanString = cleanString.replaceAll('#', '~h');
+    cleanString = cleanString.replaceAll('/', '~s');
     return cleanString;
   }
   const args = [];
@@ -32,6 +32,7 @@ function App() {
     args[2] = '_';
   }
   const url = `https://api.memegen.link/images/${args[0]}${args[1]}${args[2]}.jpg`;
+  console.log(url);
   const memegenData = data;
   const arr = [];
   const fileName = `/${args[0]}_${args[1]}_${args[2]}.jpeg`;
