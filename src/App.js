@@ -22,17 +22,18 @@ function App() {
     return cleanString;
   }
   const args = [];
-  args[0] = `${cleanInput(memeType)}/`;
-  args[1] = `${cleanInput(topText)}/`;
-  args[2] = cleanInput(bottomText);
-  if (args[1] === '') {
-    args[1] = '_/';
+  args[0] = cleanInput(memeType);
+  args[1] = `/${cleanInput(topText)}`;
+  args[2] = `/${cleanInput(bottomText)}`;
+
+  if (args[1] === '/') {
+    args[1] = '';
   }
-  if (args[2] === '') {
-    args[2] = '_';
+  if (args[2] === '/') {
+    args[2] = '';
   }
   const url = `https://api.memegen.link/images/${args[0]}${args[1]}${args[2]}.jpg`;
-  console.log(url);
+
   const memegenData = data;
   const arr = [];
   const fileName = `/${args[0]}_${args[1]}_${args[2]}.jpeg`;
