@@ -1,7 +1,7 @@
 import './App.css';
 import './select-search.css';
-import { useState } from 'react';
-//import SelectSearch, { fuzzySearch } from 'react-select-search';
+import React, { useState } from 'react';
+import Select from 'react-select';
 import data from './memegen-info.json';
 
 function App() {
@@ -22,22 +22,30 @@ function App() {
     return cleanString;
   }
   const args = [];
-  args[0] = memeType;
-  args[1] = cleanInput(topText);
+  args[0] = `${cleanInput(memeType)}/`;
+  args[1] = `${cleanInput(topText)}/`;
   args[2] = cleanInput(bottomText);
-  const url = `https://api.memegen.link/images/${args[0]}/${args[1]}/${args[2]}.jpg`;
+  if (args[1] === '') {
+    args[1] = '_/';
+  }
+  if (args[2] === '') {
+    args[2] = '_';
+  }
+  const url = `https://api.memegen.link/images/${args[0]}${args[1]}${args[2]}.jpg`;
   const memegenData = data;
   const arr = [];
   const fileName = `/${args[0]}_${args[1]}_${args[2]}.jpeg`;
   for (let i = 0; i < Object.keys(memegenData).length; i++) {
-    arr[i] = { name: memegenData[i].name, value: memegenData[i].id };
+    arr[i] = { label: memegenData[i].name, value: memegenData[i].id };
   }
   const handleGenerate = (event) => {
+    console.log(url);
     event.preventDefault();
     setImage(url);
   };
   const handleMemeChange = (event) => {
-    setMemeType(event);
+    setMemeType(event.value);
+    console.log(event.value);
   };
   const handleEnter = (event) => {
     if (event.keyCode === 13) {
@@ -100,6 +108,7 @@ function App() {
         <br />
 
         <br />
+
         {/* <label>
           Meme template
           <SelectSearch
@@ -114,9 +123,16 @@ function App() {
           />
           <input style={{ display: 'none' }} />
         </label> */}
+
         <label>
           Meme template
+          <Select onChange={handleMemeChange} options={arr} value={memeType} />
+          <input style={{ display: 'none' }} />
+        </label>
+        {/* <label>
+          Meme template
           <select onChange={handleMemeChange}>
+            value={memeType}
             {arr.map((template) => {
               return (
                 <option value={template.id} key={template.id}>
@@ -125,7 +141,7 @@ function App() {
               );
             })}
           </select>
-        </label>
+        </label> */}
         <br />
 
         <button onClick={handleGenerate} data-test-id="generate-meme">
