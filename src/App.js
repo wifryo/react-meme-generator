@@ -1,7 +1,7 @@
 import './App.css';
 import './select-search.css';
 import { useState } from 'react';
-import SelectSearch, { fuzzySearch } from 'react-select-search';
+//import SelectSearch, { fuzzySearch } from 'react-select-search';
 import data from './memegen-info.json';
 
 function App() {
@@ -68,10 +68,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  /*  const cleanInput = (input) => {
-    let cleanString = input.replace(/'?'/g, '~q');
-  }; */
-
   return (
     <div>
       <div>
@@ -104,7 +100,7 @@ function App() {
         <br />
 
         <br />
-        <label>
+        {/* <label>
           Meme template
           <SelectSearch
             onChange={handleMemeChange}
@@ -113,9 +109,24 @@ function App() {
             placeholder="Choose meme template"
             search
             filterOptions={fuzzySearch}
+            onKeyPress={handleEnter}
+            autoComplete
           />
           <input style={{ display: 'none' }} />
+        </label> */}
+        <label>
+          Meme template
+          <select onChange={handleMemeChange}>
+            {arr.map((template) => {
+              return (
+                <option value={template.id} key={template.id}>
+                  {template.name}
+                </option>
+              );
+            })}
+          </select>
         </label>
+        <br />
 
         <button onClick={handleGenerate} data-test-id="generate-meme">
           Generate
